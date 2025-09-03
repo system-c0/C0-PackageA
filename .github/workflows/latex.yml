@@ -1,5 +1,5 @@
-name: Compile LaTeX document and run linters
-
+name: Compile LaTeX document and run linters 
+Integrate linters into workflow
 on:
   push:
     branches: [ "main" ]
@@ -17,7 +17,7 @@ jobs:
           repository: system-c0/c0-lint
           path: linters
 
-      - name: Run C0 Purity Check
+      - name: Run Linters
         run: |
           chmod +x linters/run-linters.sh
           ./linters/run-linters.sh main.tex
