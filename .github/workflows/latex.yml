@@ -1,5 +1,5 @@
 name: Compile LaTeX document and run linters 
-Integrate linters into workflow
+
 on:
   push:
     branches: [ "main" ]
