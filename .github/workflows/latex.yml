@@ -1,18 +1,33 @@
-name: Compile LaTeX document
+name: Compile LaTeX document and run linters
+
 on:
   push:
     branches: [ "main" ]
+
 jobs:
-  build_latex:
+  build_and_lint:
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
+      - name: Set up Git repository for PackageA
         uses: actions/checkout@v4
+
+      - name: Get Linter Scripts
+        uses: actions/checkout@v4
+        with:
+          repository: system-c0/c0-lint
+          path: linters
+
+      - name: Run C0 Purity Check
+        run: |
+          chmod +x linters/run-linters.sh
+          ./linters/run-linters.sh main.tex
+
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
           root_file: main.tex
           compiler: xelatex
+
       - name: Upload PDF file
         uses: actions/upload-artifact@v4
         with:
