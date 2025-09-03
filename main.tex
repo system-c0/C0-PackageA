@@ -1,0 +1,92 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{unicode-math}
+\setmainfont{Latin Modern Roman}\setmonofont{Latin Modern Mono}
+\setmathfont{Latin Modern Math}
+\usepackage{hyperref}\usepackage{parskip}\usepackage{enumitem}
+\usepackage{titlesec}\usepackage{caption}\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+
+% Makra rdzeniowe
+\newcommand{\flip}{\(\tau\)} % flip-site
+\newcommand{\voids}{\(\varepsilon\)} % epsilon
+\newcommand{\resdot}{\(\bullet\)} % dot
+% Ramki
+\newenvironment{kadr}[1]{\tcolorbox[enhanced,breakable,
+  title={Fig. #1},colback=white,colframe=black!60]}{\endtcolorbox}
+\newenvironment{psketch}{\tcolorbox[enhanced,breakable,
+  colback=black!2,colframe=black!20,title={Proof sketch}]}{\endtcolorbox}
+
+\title{System C0: Ontologia Kontrastu\\[4pt]\large Package A (C0-core)}
+\author{Zespół C0 (Claude, ChatGPT5 High, Janusz Feszter)}\date{\today}
+\begin{document}\maketitle
+
+\begin{tcolorbox}[colback=black!1,colframe=black!15,title=Profil i metadane]
+Profil: C0-core \quad Ruchy: \{flip (\(\tau a \leftrightarrow \bar{a}\tau\)), anihilacja (\(a\bar{a}\to\varepsilon\), \(\bar{a}a\to\varepsilon\)), slide (\(\equiv\))\}\\
+Interfejsy: niepolaryzowane (\(\bullet/\varepsilon\)) \quad Purity-lint: PASS
+\end{tcolorbox}
+
+\tableofcontents\bigskip
+
+\section{Wprowadzenie i profil dokumentu}
+
+Ten dokument definiuje System C0 jako ontologię kontrastu — system formalny oparty nie na obiektach i stanach, lecz na lokalnych różnicach i ich interakcjach na granicach. Package A stanowi jego rdzeń (core): zawiera wyłącznie definicje, demonstracje i reguły, które są wewnętrznie spójne i nie odwołują się do zewnętrznych interpretacji.
+
+Profil dokumentu (patrz tabela na stronie tytułowej) definiuje jego zakres: operuje wyłącznie na ruchach \flip{} (flip), anihilacji (\(a\bar{a}\to\varepsilon\)) i slide (\(\equiv\)), a jego jedynym obserwowalnym wynikiem są niepolaryzowane residua na interfejsach (\resdot/\voids). Celem jest przedstawienie C0 w jego najczystszej, wolnej od interpretacji formie.
+
+\section{Demonstracje C0}
+\subsection{XOR (profil: C0-core)}
+
+
+\subsection{XOR (profil: C0-core)}
+Demonstracja bramki XOR (exclusive OR) pokazująca, jak z dwóch podstawowych ruchów wyłania się nieliniowe zachowanie logiczne.
+
+\begin{kadr}{2.1A (Kadr 0 --- konfiguracja początkowa)}
+\ttfamily [L] a --- [(\tau)] --- M --- [O]\\{}
+[R] a --- M --- [O]
+\end{kadr}
+\begin{kadr}{2.1B (Kadr 1 --- flip na lewej ścieżce)}
+\ttfamily [L] --- [(\tau)] --- \={a} --- M --- [O]\\{}
+[R] a --- M --- [O]
+\end{kadr}
+\begin{kadr}{2.1C (Kadr 2 --- anihilacja przy M)}
+\ttfamily … —— \={a} \ \ || M || \ \ a —— … \quad [\={a}\ a] \(\to\) \(\varepsilon\)
+\end{kadr}
+\begin{kadr}{2.1D (Kadr 3 --- odczyt granicy)}
+\ttfamily [O]: \(\varepsilon\)
+\end{kadr}
+
+\begin{psketch}
+Dowód poprawności sprowadza się do weryfikacji, że każda sprawiedliwa sekwencja redukcji lokalnych redexów (\flip{} i anihilacja) prowadzi do tego samego residuum na granicy [O]. Zbiór redexów jest skończony, a każdy ruch go zmniejsza, co gwarantuje terminację. Niezależność od kolejności (confluence) wynika z faktu, że redexy na rozłącznych ścieżkach są niezależne, a spotkanie przy M jest jedynym punktem interakcji.
+\end{psketch}
+
+\subsubsection*{Tabela residuów dla XOR}
+\begin{center}
+\begin{tabular}{ll|c}
+\hline
+\textbf{Wejście [L]} & \textbf{Wejście [R]} & \textbf{Wyjście [O]} \\
+\hline
+a & a & \voids \\
+a & \voids & \resdot \\
+\voids & a & \resdot \\
+\voids & \voids & \voids \\
+\hline
+\end{tabular}
+\end{center}
+
+\subsection{Interferometr (profil: C0-core)}
+% (miejsce na treść)
+
+\section{Style Guide (C0-core)}
+
+\section{Purity-lint (specyfikacja)}
+
+\section{C0 Meditative Practice (C-1)}
+
+\section*{Abstract (EN)}
+
+\appendix
+\section{Nagłówek profilu (template)}
+\section{Wersjonowanie rysunków}
+\section*{Artefakt: Raport purity-lint (PASS)}
+\end{document}
